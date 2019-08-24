@@ -1,0 +1,19 @@
+{
+  "name": "mutant-test",
+  "version": "1.0.0",
+  "description": "nodejs mutant test",
+  "author": "Lucas Moura <contato@mouradev.com>",
+  "license": "MIT",
+  "main": "app.js",
+  "keywords": [
+    "nodejs",
+    "elasticsearch",
+    "express"
+  ],
+  "dependencies": {
+    "elasticsearch": "16.3.0",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
