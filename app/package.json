@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "app.js",
   "scripts": {
-    "test": "node tests/app.test && node tests/loader.test"
+    "test": "node ./tests/*",
+    "live": "npm test && node app"
   },
   "keywords": [
     "nodejs",
@@ -19,7 +20,6 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "supertest": "^4.0.2",
-    "tap-spec": "^5.0.0",
     "tape": "^4.11.0"
   }
 }
