@@ -10,5 +10,4 @@ COPY . .
 
 EXPOSE 80
 
-# CMD [ "node", "app.js" ]
-CMD ["bash"]
+CMD [ "node", "app.js" ]

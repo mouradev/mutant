@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config|
   
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
-    v.cpus = 1
+    v.memory = 5120
+    v.cpus = 2
   end
 
   config.vm.box = "ubuntu/xenial64"
@@ -16,12 +16,14 @@ Vagrant.configure("2") do |config|
     d.build_image "/vagrant/elasticsearch"
     d.build_image "/vagrant/app",
       args: "-t mutant/node"
-    d.run "mutant/node",
-      args: "-p 80:80 --link elasticsearch:elasticsearch"
     d.run "docker.elastic.co/elasticsearch/elasticsearch:7.3.0",
       args: "--restart=always -d --name elasticsearch -p 9200:9200 -e 'http.host=0.0.0.0' -e 'transport.host=127.0.0.1'"
   end
-end
+    
+  config.vm.provision "shell", inline: "sleep 60"
 
-# run dev
-# docker run --link elasticsearch:elasticsearch -v /vagrant/app:/vagrant/app -it -p 80:80 mutant/node
+  config.vm.provision "docker" do |d|
+    d.run "mutant/node",
+      args: "-p 80:80 --link elasticsearch:elasticsearch"
+  end
+end
