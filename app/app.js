@@ -10,9 +10,6 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
-app.get('/', (req, res) => {
-    res.send('Hello world\n');
-});
 
 // Insert all users on cache
 let all_users = [];
@@ -23,6 +20,9 @@ loader.getAllUsers()
         });
     })
 
+app.get('/', (req, res) => {
+    res.redirect('/users');
+});
 
 app.get('/users', (req, res) => {
     let all_users = [];
@@ -74,6 +74,9 @@ app.get('/users/websites', (req, res) => {
     })
 });
 
+if (require.main === module){
+    app.listen(PORT, HOST);
+    console.log(`Running on http://${HOST}:${PORT}`);
+}
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+module.exports = app;

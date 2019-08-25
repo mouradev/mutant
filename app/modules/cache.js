@@ -7,24 +7,32 @@ const client = new elasticsearch.Client({
     hosts: [ `http://elastic:changeme@elasticsearch:9200`]
 });
 
-// Indexes
-
-if(client.indices.exists({index: 'users'})) {
-    console.log('existe index users');
-    client.indices.putMapping({
-        index: "users",
-        body: {
-            properties: {
-                name: {
-                    type: "text",
-                    fielddata: true
+client.indices.exists({index: 'users'})
+    .then((response) => {
+        if(response) {
+            console.log('existe index users');
+            client.indices.putMapping({
+                index: "users",
+                body: {
+                    properties: {
+                        name: {
+                            type: "text",
+                            fielddata: true
+                        }
+                    }
                 }
-            }
+            });
+        } else {
+            console.log('não existe index users');
+            client.indices.create({
+                index: 'users',
+            }, (err, resp, status) => {
+                console.log(resp);
+            })
+
+            
         }
     });
-}else {
-    console.log('não existe index users');
-}
 
 const getAll = (params) => {
     return client.search({
@@ -52,10 +60,21 @@ const insert = function(id, body) {
     client.index({
         index: 'users',
         id: id,
-        type: 'test',
+        type: 'text',
         body: body
     }, function(err, resp, status) {
         console.log(resp);
+        client.indices.putMapping({
+            index: "users",
+            body: {
+                properties: {
+                    name: {
+                        type: "text",
+                        fielddata: true
+                    }
+                }
+            }
+        });
     });
 }
 
