@@ -10,7 +10,7 @@ Um dos requisitos deste desafio era rodá-lo em VM usando Vagrant. Então, basta
 
 ```
 GET http://localhost:8080/users/websites
-````
+```
 
 > Lista de todos os usuários:
 
@@ -22,4 +22,4 @@ GET http://localhost:8080/users
 
 ```
 GET http://localhost:8080/users/suite
-````
+```
