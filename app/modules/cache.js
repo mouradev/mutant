@@ -11,6 +11,17 @@ const client = new elasticsearch.Client({
 
 if(client.indices.exists({index: 'users'})) {
     console.log('existe index users');
+    client.indices.putMapping({
+        index: "users",
+        body: {
+            properties: {
+                name: {
+                    type: "text",
+                    fielddata: true
+                }
+            }
+        }
+    });
 }else {
     console.log('não existe index users');
 }
@@ -22,6 +33,13 @@ const getAll = (params) => {
             query: {
                 match_all: {}
             },
+            sort: [
+                {
+                    name: {
+                        "order": "asc"
+                    }
+                }
+            ],
         }
     })
 }
@@ -48,6 +66,13 @@ const search = function(match) {
             query: {
                 match: match
             },
+            sort: [
+                {
+                    name: {
+                        "order": "asc"
+                    }
+                }
+            ],
         }
     });
 
