@@ -1,10 +1,10 @@
 ### Desafio Mutant
 
-#### Instalação
+#### Instalação 🚀
 
-somente ```vagrant up``` 
+Um dos requisitos deste desafio era rodá-lo em VM usando Vagrant. Então, basta rodar um ```vagrant up``` na pasta do projeto. 😉
 
-#### Rotas:
+#### Rotas 🔗
 
 Website de todos os usuários:
 ```
