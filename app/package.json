@@ -5,6 +5,9 @@
   "author": "Lucas Moura <contato@mouradev.com>",
   "license": "MIT",
   "main": "app.js",
+  "scripts": {
+    "test": "node tests/app.test && node tests/loader.test"
+  },
   "keywords": [
     "nodejs",
     "elasticsearch",
@@ -14,6 +17,9 @@
     "elasticsearch": "16.3.0",
     "express": "^4.16.4",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "supertest": "^4.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.11.0"
   }
 }
