@@ -25,38 +25,55 @@ loader.getAllUsers()
 
 
 app.get('/users', (req, res) => {
-    const users = [];
+    let all_users = [];
     cache.getAll().then((response) => {
-        // res.send(response);
         response.hits.hits.forEach((user) => {
-            users.join({
+            let formatted_user = {
+                "id": user._source.id,
                 "name": user._source.name,
                 "email": user._source.email,
                 "company": user._source.company.name
-            })
+            }
+            all_users.push(formatted_user);
         });
-        res.send(users);
+        res.json(all_users);
     })
 });
 
 app.get('/users/suite', (req, res) => {
+    let all_users = [];
     cache.search({
         "address.suite": "suite"
     }).then((response) => {
-        res.send(response.hits);
+        response.hits.hits.forEach((user) => {
+            let formatted_user = {
+                "id": user._source.id,
+                "name": user._source.name,
+                "email": user._source.email,
+                "company": user._source.company.name,
+                "address": user._source.address,
+            }
+            all_users.push(formatted_user);
+        });
+        res.json(all_users);
     })
 });
 
+app.get('/users/websites', (req, res) => {
+    let all_users = [];
+    cache.getAll().then((response) => {
+        response.hits.hits.forEach((user) => {
+            let formatted_user = {
+                "id": user._source.id,
+                "name": user._source.name,
+                "website": user._source.website,
+            }
+            all_users.push(formatted_user);
+        });
+        res.json(all_users);
+    })
+});
 
-
-
-
-// cache.test_connection();
-
-// const match = {
-//     "PostName": 'Node.js'
-// }
-// cache.search(match);
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
