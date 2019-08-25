@@ -6,17 +6,20 @@ Um dos requisitos deste desafio era rodá-lo em VM usando Vagrant. Então, basta
 
 #### Rotas 🔗
 
-Website de todos os usuários:
+> Website de todos os usuários:
+
 ```
 GET http://localhost:8080/users/websites
 ````
 
-Lista de todos os usuários:
+> Lista de todos os usuários:
+
 ```
 GET http://localhost:8080/users
 ```
 
-Usuários que têm 'suite' no endereço:
+> Usuários que têm 'suite' no endereço:
+
 ```
 GET http://localhost:8080/users/suite
 ````
