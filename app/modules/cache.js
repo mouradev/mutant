@@ -56,13 +56,13 @@ const getAll = (params) => {
  * 
  * @param {*} body 
  */
-const insert = function(id, body) {
+const insert = (id, body) => {
     client.index({
         index: 'users',
         id: id,
         type: 'text',
         body: body
-    }, function(err, resp, status) {
+    }, (err, resp, status) => {
         console.log(resp);
         client.indices.putMapping({
             index: "users",
@@ -78,7 +78,7 @@ const insert = function(id, body) {
     });
 }
 
-const search = function(match) {
+const search = (match) => {
     const response = client.search({
         index: 'users',
         body: {
@@ -98,16 +98,16 @@ const search = function(match) {
     return response;
 }
 
-const test_connection = function() {
+const test_connection = () => {
     client.ping({
         requestTimeout: 30000,
-        }, function(error) {
-            if (error) {
-                console.error('elasticsearch cluster is down!');
-            } else {
-                console.log('Everything is ok');
-            }
-        });
+    }, (error) => {
+        if (error) {
+            console.error('elasticsearch cluster is down!');
+        } else {
+            console.log('Everything is ok');
+        }
+    });
 }
 
 module.exports = { test_connection, insert, search, getAll }
